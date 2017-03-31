@@ -1,9 +1,5 @@
 # frozen_string_literal: true
-require 'rubygems'
-require 'rack'
-require 'json'
-require 'minitest/autorun'
-require_relative '../lib/crab_core'
+require_relative 'test_helper'
 
 class TestCrabCore < Minitest::Test
   def setup

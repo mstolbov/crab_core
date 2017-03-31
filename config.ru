@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 require 'crab_core'
 
-use Rack::Reloader, 0
+if ENV['RACK_ENV'] == 'development'
+  use Rack::Reloader, 0
+end
+
 run CrabCore
