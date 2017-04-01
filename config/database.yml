@@ -1,20 +1,21 @@
-default: &default
+development:
   adapter: postgres
   username: postgres
   password:
   host: localhost
   port: 5432
-
-development:
-  <<: *default
   database: crab_core
 
 test:
-  <<: *default
+  adapter: postgres
+  username: postgres
+  password:
+  host: localhost
+  port: 5432
   database: crab_core_test
 
 production:
-  <<: *default
+  adapter: postgres
   username: 'iwywirpvrutazo'
   password: '630db5fd6c47cac81cc40a59d455517acfd150976b53ea2d7517d3d456a876b5'
   host: 'ec2-184-72-216-69.compute-1.amazonaws.com'

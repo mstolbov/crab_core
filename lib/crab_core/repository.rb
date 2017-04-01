@@ -26,7 +26,7 @@ class CrabCore
         file = File.expand_path('config/database.yml')
         raise ConfigurationError, "Database configure file not found #{file}" unless File.exists?(file)
 
-        @config = YAML.load(File.read('config/database.yml'))[ENV['RACK_ENV'] || 'development']
+        @config = YAML.safe_load(File.read('config/database.yml'))[ENV['RACK_ENV'] || 'development']
       end
     end
   end
