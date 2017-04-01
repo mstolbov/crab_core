@@ -9,9 +9,8 @@ class CrabCore
   class Repository
     class << self
       def connection
-        user = [ config['username'], config['password'] ].compact.join(':')
         @connection ||= Sequel.connect(
-          "#{config['adapter']}://#{user}@#{config['host']}:#{config['port']}/#{config['database']}")
+          "postgres://iwywirpvrutazo:630db5fd6c47cac81cc40a59d455517acfd150976b53ea2d7517d3d456a876b5@ec2-184-72-216-69.compute-1.amazonaws.com:5432/d89m2tqnmgkrrh")
       end
 
       def connection_without_database
