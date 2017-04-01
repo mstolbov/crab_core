@@ -10,12 +10,12 @@ class CrabCore
     class << self
       def connection
         @connection ||= Sequel.connect(
-          "#{config['adapter']}://#{config['username']}@#{config['host']}:#{config['port']}/#{config['database']}")
+          "#{config['adapter']}://#{config['username']}:#{config['password']}@#{config['host']}:#{config['port']}/#{config['database']}")
       end
 
       def connection_without_database
         @connection ||= Sequel.connect(
-          "#{config['adapter']}://#{config['username']}@#{config['host']}:#{config['port']}/")
+          "#{config['adapter']}://#{config['username']}:#{config['password']}@#{config['host']}:#{config['port']}/")
       end
 
       def close
