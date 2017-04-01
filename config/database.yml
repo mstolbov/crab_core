@@ -15,8 +15,8 @@ test:
 
 production:
   <<: *default
-  username: iwywirpvrutazo
-  password: 630db5fd6c47cac81cc40a59d455517acfd150976b53ea2d7517d3d456a876b5
-  host: ec2-184-72-216-69.compute-1.amazonaws.com
+  username: 'iwywirpvrutazo'
+  password: '630db5fd6c47cac81cc40a59d455517acfd150976b53ea2d7517d3d456a876b5'
+  host: 'ec2-184-72-216-69.compute-1.amazonaws.com'
   port: 5432
-  database: d89m2tqnmgkrrh
+  database: 'd89m2tqnmgkrrh'
