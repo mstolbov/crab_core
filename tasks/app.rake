@@ -4,8 +4,8 @@ require_relative '../lib/crab_core'
 namespace :app do
   desc "Import dictionary"
   task :import, [:path] do |t, args|
-    connection = CrabCore::Repository.connection
-    dictionary = connection[:dictionary]
+    db = CrabCore::Repository.connection
+    dictionary = db[:dictionary]
     File.read(args[:path]).each_line do |word|
       dictionary.insert(word: word.strip)
     end
