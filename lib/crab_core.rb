@@ -57,4 +57,4 @@ end
 
 require_relative 'crab_core/scorer'
 require_relative 'crab_core/dictionary'
-require_relative 'crab_core/connection'
+require_relative 'crab_core/repository'

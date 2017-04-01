@@ -30,7 +30,7 @@ class CrabCore
       private
 
       def repository
-        @repository ||= CrabCore::Connection.connection[:dictionary]
+        @repository ||= CrabCore::Repository.connection[:dictionary]
       end
     end
 

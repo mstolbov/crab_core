@@ -4,16 +4,16 @@ require_relative '../lib/crab_core'
 namespace :db do
   desc "Create database"
   task :create do
-    connection = CrabCore::Connection.connection_without_database
-    config = CrabCore::Connection.config
+    connection = CrabCore::Repository.connection_without_database
+    config = CrabCore::Repository.config
     connection.run("CREATE DATABASE #{config['database']};")
-    CrabCore::Connection.close
+    CrabCore::Repository.close
     puts "Database created"
   end
 
   desc "Migrate database version"
   task :migrate do
-    connection = CrabCore::Connection.connection
+    connection = CrabCore::Repository.connection
     connection.create_table :dictionary do
       primary_key :id
       String :word

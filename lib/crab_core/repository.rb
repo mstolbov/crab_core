@@ -6,7 +6,7 @@ require 'logger'
 class CrabCore
   class ConfigurationError < CrabCoreError; end
 
-  class Connection
+  class Repository
     class << self
       def connection
         @connection ||= Sequel.connect(

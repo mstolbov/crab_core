@@ -12,4 +12,3 @@ Simple Scrabble Scorer
 > curl -X GET 'http://localhost:8080/score/lala'
 {"word":"lala","valid":false}
 ```
-
