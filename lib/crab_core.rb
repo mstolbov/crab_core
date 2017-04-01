@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-require_relative 'crab_core/score'
-
 class CrabCore
+  class CrabCoreError < StandardError; end
+
   def self.call(env)
     new(env).().finish
   end
@@ -24,6 +24,7 @@ class CrabCore
   end
 
   private
+
   def welcome
     response "Welcome To Crab Core! It's a simple Scrabble Scorer service."
   end
@@ -35,7 +36,7 @@ class CrabCore
   def score(word)
     case word
     when %r{/(\w+)$}i
-      response Score.new($1).()
+      response Scorer.($1)
     else
       bad_request
     end
@@ -53,3 +54,7 @@ class CrabCore
     Rack::Response.new("Bad Request", 502)
   end
 end
+
+require_relative 'crab_core/scorer'
+require_relative 'crab_core/dictionary'
+require_relative 'crab_core/connection'

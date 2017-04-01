@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgres
+  username: postgres
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: crab_core
+
+test:
+  <<: *default
+  database: crab_core_test
+
+production:
+  <<: *default
+  database: crab_core
