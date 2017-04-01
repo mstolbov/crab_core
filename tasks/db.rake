@@ -4,10 +4,10 @@ require_relative '../lib/crab_core'
 namespace :db do
   desc "Create database"
   task :create do
-    CrabCore::Repository.connection_without_database do |db|
-      config = CrabCore::Repository.config
-      db.run("CREATE DATABASE #{config['database']};")
-    end
+    db = CrabCore::Repository.connection_without_database
+    config = CrabCore::Repository.config
+    db.run("CREATE DATABASE #{config['database']};")
+    db.disconnect
     puts "Database created"
   end
 
