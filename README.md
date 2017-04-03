@@ -9,7 +9,7 @@ Service was deployed on `heroku`, so here you can try it.
 ```sh
 https://crab-core.herokuapp.com/score/aa
 ```
-But the dictionary in there contais only first 10000 words (tariff plan
+Heroku dictionary contais first 10000 words only (tariff plan
 restriction).
 
 ## Run manualy
@@ -60,7 +60,7 @@ To setup database run the following command `RACK_ENV=true bundle exec
 rake db:setup`, it will create database and table to store dictionary.
 Btw, you don't have to import the dectionary to run tests.
 
-Funnaly , run tests
+Funnaly, run tests
 ```sh
 bundle exec rake test
 ```
