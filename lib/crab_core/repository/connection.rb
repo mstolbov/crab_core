@@ -11,13 +11,9 @@ class CrabCore
           yield connection if block_given?
         end
 
-        private
-
-        def connection
-          @connection ||= Sequel.connect("#{config['adapter']}://#{config['database']}", {
-            max_connections: config['pool'],
-              timeout: config['timeout']
-          })
+        def connection_without_database
+          Sequel.connect(
+            "#{config['adapter']}://#{config['user']}@#{config['host']}:#{config['port']}/")
         end
 
         def config
@@ -27,6 +23,13 @@ class CrabCore
           raise ConfigurationError, "Database configure file not found #{file}" unless File.exists?(file)
 
           @config = YAML.safe_load(File.read('config/database.yml'))[ENV['RACK_ENV'] || 'development']
+        end
+
+        private
+
+        def connection
+          @connection ||= Sequel.connect(
+            "#{config['adapter']}://#{config['user']}@#{config['host']}:#{config['port']}/#{config['database']}")
         end
       end
     end

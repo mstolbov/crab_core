@@ -19,24 +19,25 @@ Scorer written on ruby, so you need install ruby interpreter. I
 recommend to use [rbenv](https://github.com/rbenv/rbenv#installation) to
 install ruby. You can use rvm or install ruby from image, it's up to
 you.
-To store the dictionary Scorer use SQLite, so you don't have to install
-any database server.
+To store the dictionary Scorer use Postgresql.
 
 ### Database Config
-Application already have prepared dictionary DB, so you don't have to do
-anything else. But if you want to use another DB, you can configure it
-in `config/database.yml` file, by default it use `development`
+To make the applications work with DB, you have to configure
+credentials. You can do it in DB config file.
+DB config is in `config/database.yml`, by default it use `development`
 enviropment.
 
 ### Prepare to run
-After install dependencies but before run Scorer need to execute
+After install dependencies but before run Scorer need to execute few
 following command
 - `bundle install` - it will install used gems to ruby
-
-Application already have prepared dictionary DB, so you don't have to do
-anything else. If you want to add new words, you can do it by this way:
-- `bundle exec rake app:import[':path_to_file']` - it'll read words from
-  file and fill it to dictionary DB.
+- `bundle exec rake db:setup` - it will create database and table to
+  store dictionary
+- `bundle exec rake app:import['import/sowpods.txt']` - it'll import
+  dictionary to DB. It's long action, so just wait.
+  `import/sowpods.txt`
+it's path where it takes data to import, you can change it to another
+file or run it to inport new words.
 
 ### Run server
 Seems that you ready to run application server, the following command to

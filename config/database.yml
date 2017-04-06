@@ -1,17 +1,20 @@
 development:
-  adapter: sqlite
-  database: db/dictionary.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: postgres
+  user: postgres
+  host: localhost
+  port: 5432
+  database: crab_core
 
 test:
-  adapter: sqlite
-  database: db/test.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: postgres
+  user: postgres
+  host: localhost
+  port: 5432
+  database: crab_core_test
 
 production:
-  adapter: sqlite
-  database: db/dictionary.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: postgres
+  user: 'iwywirpvrutazo:630db5fd6c47cac81cc40a59d455517acfd150976b53ea2d7517d3d456a876b5'
+  host: 'ec2-184-72-216-69.compute-1.amazonaws.com'
+  port: 5432
+  database: 'd89m2tqnmgkrrh'
