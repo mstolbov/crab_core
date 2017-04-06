@@ -1,36 +1,26 @@
 # frozen_string_literal: true
 class CrabCore
-  class WordNotFound < CrabCoreError; end
-
   class Dictionary
     class << self
-      def find!(word)
-        result = repository[word: word]
-        raise WordNotFound unless result
-        new(id: result.id, word: result.word)
-      end
-
-      def contains?(word)
-        !!repository[word: word]
-      end
-
-      def create(word)
-        id = repository.insert(word: word.upcase)
+      def add(word)
+        word = word.upcase
+        id = repository.create(word: word)
         new(id: id, word: word)
       end
 
-      def delete(id)
-        repository.where(id: id).delete
+      def remove(word)
+        record = repository.find(word: word)
+        repository.delete(record[:id])
       end
 
-      def all
-        repository.all.map { |res| new(res) }
+      def contains?(word)
+        !!repository.where(word: word.upcase)
       end
 
       private
 
       def repository
-        @repository ||= CrabCore::Repository.connection[:dictionary]
+        @repository ||= CrabCore::Repository.new(:dictionary)
       end
     end
 
@@ -39,10 +29,6 @@ class CrabCore
     def initialize(id:, word:)
       @id = id
       @word = word
-    end
-
-    def delete
-      self.class.delete(id)
     end
   end
 end

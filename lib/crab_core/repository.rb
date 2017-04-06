@@ -1,27 +1,34 @@
 # frozen_string_literal: true
-require 'yaml'
-require 'sequel'
+require_relative 'repository/connection'
 
 class CrabCore
-  class ConfigurationError < CrabCoreError; end
-
   class Repository
-    class << self
-      def connection
-        @connection ||= Sequel.connect("#{config['adapter']}://#{config['database']}", {
-          max_connections: config['pool'],
-          timeout: config['timeout']
-        })
-      end
+    class NotFound < ::CrabCore::CrabCoreError; end
 
-      def config
-        return @config if @config
+    def initialize(table)
+      @table = table
+    end
 
-        file = File.expand_path('config/database.yml')
-        raise ConfigurationError, "Database configure file not found #{file}" unless File.exists?(file)
+    def all
+      Connection.() { |c| c[@table].all }
+    end
 
-        @config = YAML.safe_load(File.read('config/database.yml'))[ENV['RACK_ENV'] || 'development']
-      end
+    def find(id)
+      result = Connection.() { |c| c[@table][id: id] }
+      raise NotFound unless result
+      result
+    end
+
+    def where(condition)
+      Connection.() { |c| c[@table][condition] }
+    end
+
+    def create(params)
+      Connection.() { |c| c[@table].insert(params) }
+    end
+
+    def delete(id)
+      Connection.() { |c| c[@table].where(id: id).delete }
     end
   end
 end

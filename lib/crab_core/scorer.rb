@@ -21,7 +21,7 @@ class CrabCore
     end
 
     def call
-      if Dictionary.contains?(word.upcase)
+      if Dictionary.contains?(word)
         success
       else
         failure
