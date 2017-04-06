@@ -8,15 +8,10 @@ class CrabCore
   class Repository
     class << self
       def connection
-        user = [ config['username'], config['password'] ].compact.join(':')
-        @connection ||= Sequel.connect(
-          "#{config['adapter']}://#{user}@#{config['host']}:#{config['port']}/#{config['database']}")
-      end
-
-      def connection_without_database
-        user = [ config['username'], config['password'] ].compact.join(':')
-        Sequel.connect(
-          "#{config['adapter']}://#{user}@#{config['host']}:#{config['port']}/")
+        @connection ||= Sequel.connect("#{config['adapter']}://#{config['database']}", {
+          max_connections: config['pool'],
+          timeout: config['timeout']
+        })
       end
 
       def config

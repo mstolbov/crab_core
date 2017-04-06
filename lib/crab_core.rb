@@ -14,7 +14,7 @@ class CrabCore
     case @request.path
     when '/'
       welcome
-    when '/42'
+    when '/score/42'
       forty_two
     when %r{/score(.*)}i
       score $1
@@ -30,7 +30,13 @@ class CrabCore
   end
 
   def forty_two
-    response "Answer to the Ultimate Question of Life, the Universe, and Everything"
+    respond = {
+      valid: true,
+      word: "Answer to the Ultimate Question of Life, the Universe, and Everything",
+      score: 42
+    }.to_json
+
+    response respond
   end
 
   def score(word)
